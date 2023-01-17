@@ -6,7 +6,8 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: self-hosted
+    runs-on:
+      - self-hosted
 
     steps:
       - run: echo "${{ toJson(github.event) }}"
