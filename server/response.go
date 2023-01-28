@@ -27,7 +27,9 @@ func responseOk[T any](w http.ResponseWriter, data T, message ...string) {
 	}
 
 	w.WriteHeader(http.StatusOK)
-	w.Write(raw)
+	if _, err := w.Write(raw); err != nil {
+		panic(err)
+	}
 }
 
 func responseErr(w http.ResponseWriter, err error, status ...int) {
@@ -43,5 +45,7 @@ func responseErr(w http.ResponseWriter, err error, status ...int) {
 	}
 
 	w.WriteHeader(s)
-	w.Write(raw)
+	if _, err := w.Write(raw); err != nil {
+		panic(err)
+	}
 }
